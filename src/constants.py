@@ -33,8 +33,8 @@ QSS_PATH = 'themes/default.qss'
 """
 web_assets configuration
 """
-HTML_PATH = 'web_assets/'
-PUBLIC_PATH = 'web_assets/public/'
+HTML_PATH = 'web/'
+PUBLIC_PATH = 'web/public/'
 
 """
 icon name

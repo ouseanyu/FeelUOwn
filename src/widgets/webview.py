@@ -13,7 +13,8 @@ from base.utils import func_coroutine
 
 
 class WebView(QWebView):
-    """这个类的实例可能发出的信号。（也就是说，controller只能绑定这些信号，其他信号尽量不要绑定）
+    """这个类的实例可能发出的信号。（也就是说，controller只能绑定这些信号，
+    其他信号尽量不要绑定）
     loadProgress(int)
     """
     signal_play = pyqtSignal([int])
@@ -28,6 +29,8 @@ class WebView(QWebView):
         self.init()
 
         self.js_queue = []  # 保存页面load完，要执行的js代码
+
+        self.load_htmlfile('index.html')
 
     def init(self):
         self.init_singal_binding()
@@ -76,7 +79,6 @@ class WebView(QWebView):
         tracks = songs['tracks']
         self.signal_play_songs.emit(tracks)
 
-    @pyqtSlot(int)
     def search_artist(self, aid):
         LOG.debug("search artist info, the artist id is: " + str(aid))
         self.signal_search_artist.emit(aid)
@@ -86,51 +88,13 @@ class WebView(QWebView):
         LOG.debug("search album info, the album id is: " + str(aid))
         self.signal_search_album.emit(aid)
 
-    def run_js_interface(self, data=None):
-        """
-
-        :param data: string, such as json.dumps(dict)
-        :return:
-        """
-        pass
-
     """下面都是给controller调用的函数，最好不要在其他地方调用
     """
-
-    def show_loading_animation(self):
-        self.load_htmlfile("loading.html")
 
     def load_htmlfile(self, filename):
         path = QFileInfo(HTML_PATH + filename).absoluteFilePath()
         self.load(QUrl.fromLocalFile(path))
-
-    def load_playlist(self, playlist_data):
-        """
-        :param playlist_data:
-        :return:
-        """
-        data = json.dumps(playlist_data)
-        path = QFileInfo(HTML_PATH + 'playlist.html').absoluteFilePath()
-        js_code = 'window.fill_playlist(%s)' % data
-        self.js_queue.append(js_code)
-        self.load(QUrl.fromLocalFile(path))
-        self.page().mainFrame().addToJavaScriptWindowObject('js_python', self)
-
-    def load_album(self, album_detail):
-        data = json.dumps(album_detail)
-        path = QFileInfo(HTML_PATH + 'album.html').absoluteFilePath()
-        js_code = 'window.fill_album(%s)' % data
-        self.js_queue.append(js_code)
-        self.load(QUrl.fromLocalFile(path))
-        self.page().mainFrame().addToJavaScriptWindowObject('js_python', self)
-
-    def load_artist(self, artist_detail):
-        data = json.dumps(artist_detail)
-        path = QFileInfo(HTML_PATH + 'artist.html').absoluteFilePath()
-        js_code = 'window.fill_artist(%s)' % data
-        self.js_queue.append(js_code)
-        self.load(QUrl.fromLocalFile(path))
-        self.page().mainFrame().addToJavaScriptWindowObject('js_python', self)
+        print (QUrl.fromLocalFile(path))
 
     def load_search_result(self, songs):
         data = json.dumps(songs)

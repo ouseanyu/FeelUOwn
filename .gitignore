@@ -41,8 +41,8 @@ src/*.png
 src/*.jpg
 src/widgets/*.png
 src/widgets/*.jpg
-code/web/imgs/*.jpg
-code/web/imgs/*.png
+src/web/imgs/*.jpg
+src/web/imgs/*.png
 
 # js
 node_modules/
