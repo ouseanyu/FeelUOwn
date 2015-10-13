@@ -12,8 +12,7 @@ os.chdir(path)
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtGui import QIcon
 
-from constants import QSS_PATH, LOGFILE, \
-    MODE, DEBUG, WINDOW_ICON
+from constants import LOGFILE, MODE, DEBUG, WINDOW_ICON
 
 from controllers import Controller
 from quamash import QEventLoop
@@ -28,10 +27,6 @@ if __name__ == "__main__":
 
     app_event_loop = QEventLoop(app)
     asyncio.set_event_loop(app_event_loop)
-
-    qss = QSS_PATH
-    with open(qss, "r") as qssfile:
-        app.setStyleSheet(qssfile.read())
 
     if MODE != DEBUG:
         f_handler = open(LOGFILE, 'w')

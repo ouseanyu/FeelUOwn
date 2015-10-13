@@ -138,6 +138,7 @@ a:hover {
 html,
 body {
   font-family: "Monaco", "Ubuntu Mono", "Source Code Pro", "DejaVu Sans";
+  font-size: 12px;
   color: #5f6e75;
   height: 100%;
   width: 100%;
