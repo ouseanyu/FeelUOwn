@@ -1,0 +1,305 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+  text-size-adjust: none;
+}
+html.fullscreen,
+body.fullscreen {
+  height: 100%;
+  min-width: 960px;
+}
+code,
+kbd,
+pre,
+samp {
+  font-family: courier new, courier, monospace;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+textarea {
+  overflow: auto;
+  resize: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: none;
+}
+:focus {
+  outline: none;
+  quotes: none;
+}
+ins {
+  text-decoration: none;
+}
+del {
+  text-decoration: line-through;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+body {
+  font-family: "Ubuntu", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-smoothing: antialiased;
+}
+a {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+a:hover {
+  text-decoration: none;
+}
+
+.btn {
+  cursor: normal;
+}
+.btn:hover {
+  cursor: pointer;
+}
+
+html,
+body {
+  font-family: "Monaco", "Ubuntu Mono", "Source Code Pro", "DejaVu Sans";
+  color: #5f6e75;
+  height: 100%;
+  width: 100%;
+  background-color: #fbf6e3;
+}
+html .transparent,
+body .transparent {
+  background: transparent;
+  height: 100%;
+  width: 100%;
+}
+html .transparent .album,
+body .transparent .album {
+  filter: blur(20px);
+  background: transparent;
+  height: 100%;
+  width: 100%;
+}
+html .transparent .album .content,
+body .transparent .album .content {
+  height: 100%;
+  width: 100%;
+}
+html .transparent .album .content .search-container,
+body .transparent .album .content .search-container {
+  width: 100%;
+  height: 30px;
+}
+html .transparent .album .content .search-container .search_panel,
+body .transparent .album .content .search-container .search_panel {
+  width: 300px;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 30px;
+}
+html .transparent .album .content .search-container .search_panel input,
+body .transparent .album .content .search-container .search_panel input {
+  height: 30px;
+  width: 200px;
+  border-radius: 10px;
+  border: 0px;
+  padding: 0px;
+  padding-left: 10px;
+  box-shadow: 0 0 1px #5f6e75;
+}
+html .transparent .album .content .search-container .search_panel input:focus,
+body .transparent .album .content .search-container .search_panel input:focus {
+  box-shadow: 0 0 5px #5f6e75;
+}
+html .transparent .album .content .music-table-container,
+body .transparent .album .content .music-table-container {
+  margin: 0 auto;
+  margin-top: 50px;
+  width: 56%;
+  height: auto;
+  border: 1px dashed #5f6e75;
+}
+html .transparent .album .content .music-table-container .music-table-panel,
+body .transparent .album .content .music-table-container .music-table-panel {
+  width: 80%;
+}
+html .transparent .album .content .player-control-container,
+body .transparent .album .content .player-control-container {
+  padding-top: 30px;
+  width: 100%;
+  height: 100px;
+}
+html .transparent .album .content .player-control-container .player-control-panel,
+body .transparent .album .content .player-control-container .player-control-panel {
+  width: 400px;
+  margin: 0 auto;
+  height: 100%;
+  text-align: center;
+}
+html .transparent .album .content .player-control-container .player-control-panel .play-control,
+body .transparent .album .content .player-control-container .player-control-panel .play-control {
+  margin: 0 5px;
+  background-position: center center;
+  background-size: cover;
+  border-radius: 50%;
+  box-shadow: 0 0 2px #5f6e75;
+  display: inline-block;
+  line-height: 100px;
+  vertical-align: middle;
+}
+html .transparent .album .content .player-control-container .player-control-panel .play-previous,
+body .transparent .album .content .player-control-container .player-control-panel .play-previous {
+  width: 60px;
+  height: 60px;
+}
+html .transparent .album .content .player-control-container .player-control-panel .play-pause,
+body .transparent .album .content .player-control-container .player-control-panel .play-pause {
+  width: 100px;
+  height: 100px;
+}
+html .transparent .album .content .player-control-container .player-control-panel .play-next,
+body .transparent .album .content .player-control-container .player-control-panel .play-next {
+  width: 60px;
+  height: 60px;
+}
+html .transparent .album .content .songs-container,
+body .transparent .album .content .songs-container {
+  padding-top: 30px;
+  width: 100%;
+}
+html .transparent .album .content .songs-container .songs-panel,
+body .transparent .album .content .songs-container .songs-panel {
+  width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+html .transparent .album .content .songs-container .songs-panel table,
+body .transparent .album .content .songs-container .songs-panel table {
+  width: 100%;
+  border: 0;
+  table-layout: fixed;
+}
+html .transparent .album .content .songs-container .songs-panel table tr,
+body .transparent .album .content .songs-container .songs-panel table tr {
+  border: 0;
+}
+html .transparent .album .content .songs-container .songs-panel table tr.active,
+body .transparent .album .content .songs-container .songs-panel table tr.active {
+  color: #2aa198;
+}
+html .transparent .album .content .songs-container .songs-panel table tr th,
+body .transparent .album .content .songs-container .songs-panel table tr th {
+  padding: 8px 3px;
+  font-size: 14px;
+  text-align: left;
+  font-weight: normal;
+  border: 0;
+  overflow: hidden;
+}
+html .transparent .album .content .songs-container .songs-panel table tr th.ops,
+body .transparent .album .content .songs-container .songs-panel table tr th.ops {
+  width: 20px;
+}
+html .transparent .album .content .songs-container .songs-panel table tr th.name,
+body .transparent .album .content .songs-container .songs-panel table tr th.name {
+  width: 70px;
+}
+html .transparent .album .content .songs-container .songs-panel table tr th.artist,
+body .transparent .album .content .songs-container .songs-panel table tr th.artist {
+  width: 60px;
+}
+html .transparent .album .content .songs-container .songs-panel table tr th.album,
+body .transparent .album .content .songs-container .songs-panel table tr th.album {
+  width: 50px;
+}
+html .transparent .album .content .songs-container .songs-panel table tr th.duration,
+body .transparent .album .content .songs-container .songs-panel table tr th.duration {
+  width: 18px;
+}
+html .transparent .album .content .songs-container .songs-panel table tr td,
+body .transparent .album .content .songs-container .songs-panel table tr td {
+  padding: 2px 4px;
+  overflow: hidden;
+  font-size: 12px;
+  border: 0;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
