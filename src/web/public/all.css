@@ -130,9 +130,17 @@ a:hover {
 
 .btn {
   cursor: normal;
+  -webkit-user-select: none;
 }
 .btn:hover {
   cursor: pointer;
+}
+.background-image-center {
+  background-size: cover;
+  background-position: center center;
+}
+.no-selection {
+  -webkit-user-select: none;
 }
 
 html,
@@ -140,6 +148,7 @@ body {
   font-family: "Monaco", "Ubuntu Mono", "Source Code Pro", "DejaVu Sans";
   font-size: 12px;
   color: #5f6e75;
+  overflow: hidden;
   height: 100%;
   width: 100%;
   background-color: #fbf6e3;
@@ -156,6 +165,36 @@ body .transparent .album {
   background: transparent;
   height: 100%;
   width: 100%;
+  display: -webkit-flex;
+  -webkit-flex-direction: row;
+}
+html .transparent .album .left-layer,
+body .transparent .album .left-layer {
+  width: 0px;
+  height: 100%;
+  background-color: #182d37;
+  transition: 0.5s;
+  overflow: hidden;
+}
+html .transparent .album .left-layer .left-container,
+body .transparent .album .left-layer .left-container {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+html .transparent .album .left-layer .left-container .avatar-container,
+body .transparent .album .left-layer .left-container .avatar-container {
+  width: 100%;
+  height: 100px;
+  padding-top: 50px;
+}
+html .transparent .album .left-layer .left-container .avatar-container .avatar,
+body .transparent .album .left-layer .left-container .avatar-container .avatar {
+  margin: 0 auto;
+  height: 100px;
+  width: 100px;
+  border-radius: 2px;
+  box-shadow: 0 0 2px #5f6e75;
 }
 html .transparent .album .content,
 body .transparent .album .content {
@@ -246,19 +285,23 @@ body .transparent .album .content .songs-container {
 }
 html .transparent .album .content .songs-container .songs-panel,
 body .transparent .album .content .songs-container .songs-panel {
-  width: 680px;
+  width: 60%;
   margin: 0 auto;
   text-align: center;
 }
 html .transparent .album .content .songs-container .songs-panel table,
 body .transparent .album .content .songs-container .songs-panel table {
-  width: 100%;
+  margin: 0 auto;
+  width: 90%;
+  overflow: hidden;
   border: 0;
+  overflow: hidden;
   table-layout: fixed;
 }
 html .transparent .album .content .songs-container .songs-panel table tr,
 body .transparent .album .content .songs-container .songs-panel table tr {
   border: 0;
+  height: 16px;
 }
 html .transparent .album .content .songs-container .songs-panel table tr.active,
 body .transparent .album .content .songs-container .songs-panel table tr.active {
@@ -266,6 +309,7 @@ body .transparent .album .content .songs-container .songs-panel table tr.active 
 }
 html .transparent .album .content .songs-container .songs-panel table tr th,
 body .transparent .album .content .songs-container .songs-panel table tr th {
+  -webkit-user-select: none;
   padding: 8px 3px;
   font-size: 14px;
   text-align: left;
@@ -275,32 +319,101 @@ body .transparent .album .content .songs-container .songs-panel table tr th {
 }
 html .transparent .album .content .songs-container .songs-panel table tr th.ops,
 body .transparent .album .content .songs-container .songs-panel table tr th.ops {
-  width: 20px;
+  width: 40px;
 }
 html .transparent .album .content .songs-container .songs-panel table tr th.name,
 body .transparent .album .content .songs-container .songs-panel table tr th.name {
-  width: 70px;
+  max-width: 180px;
 }
 html .transparent .album .content .songs-container .songs-panel table tr th.artist,
 body .transparent .album .content .songs-container .songs-panel table tr th.artist {
-  width: 60px;
+  max-width: 140px;
 }
 html .transparent .album .content .songs-container .songs-panel table tr th.album,
 body .transparent .album .content .songs-container .songs-panel table tr th.album {
-  width: 50px;
+  max-width: 160px;
 }
 html .transparent .album .content .songs-container .songs-panel table tr th.duration,
 body .transparent .album .content .songs-container .songs-panel table tr th.duration {
-  width: 18px;
+  width: 38px;
 }
 html .transparent .album .content .songs-container .songs-panel table tr td,
 body .transparent .album .content .songs-container .songs-panel table tr td {
+  -webkit-user-select: none;
   padding: 2px 4px;
-  overflow: hidden;
   font-size: 12px;
   border: 0;
   text-align: left;
   text-overflow: ellipsis;
   white-space: nowrap;
+  overflow: hidden;
+}
+html .transparent .album .content .songs-container .songs-panel table tr td.active::after,
+body .transparent .album .content .songs-container .songs-panel table tr td.active::after {
+  content: " ♬";
+}
+html .transparent .album .right-layer,
+body .transparent .album .right-layer {
+  width: 0px;
+  height: 100%;
+  background-color: #182d37;
+  transition: 0.5s;
+  overflow: hidden;
+}
+html .transparent .album .right-layer .right-panel,
+body .transparent .album .right-layer .right-panel {
+  width: 100%;
+  height: 100%;
+}
+html .transparent .album .right-layer .right-panel .playlists-container,
+body .transparent .album .right-layer .right-panel .playlists-container {
+  width: 100%;
+  height: 100%;
+}
+html .transparent .album .right-layer .right-panel .playlists-container .playlists-panel,
+body .transparent .album .right-layer .right-panel .playlists-container .playlists-panel {
+  padding: 30px;
+  border: 1px dashed #5f6e75;
+  margin: 0 auto;
+  width: 90%;
+  height: 90%;
+}
+html .transparent .album .right-layer .right-panel .playlists-container .playlists-panel .title,
+body .transparent .album .right-layer .right-panel .playlists-container .playlists-panel .title {
+  font-size: 12px;
+  color: #5f6e75;
+}
+html .transparent .album .right-layer .right-panel .playlists-container .playlists-panel .playlists-sub-container,
+body .transparent .album .right-layer .right-panel .playlists-container .playlists-panel .playlists-sub-container {
+  padding: 4px 5px;
+  width: 100%;
+}
+html .transparent .album .right-layer .right-panel .playlists-container .playlists-panel .playlists-sub-container .playlist-title,
+body .transparent .album .right-layer .right-panel .playlists-container .playlists-panel .playlists-sub-container .playlist-title {
+  -webkit-user-select: none;
+  color: #839496;
+  font-size: 14px;
+  padding: 5px 10px;
+  text-align: left;
+  display: block;
+  width: 200px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+html .transparent .album .right-layer .right-panel .playlists-container .playlists-panel .playlists-sub-container .playlist-title:hover,
+body .transparent .album .right-layer .right-panel .playlists-container .playlists-panel .playlists-sub-container .playlist-title:hover {
+  color: #268bd2;
+}
+html .transparent .album .right-layer .right-panel .playlists-container .playlists-panel .playlists-sub-container .playlist-title.active::before,
+body .transparent .album .right-layer .right-panel .playlists-container .playlists-panel .playlists-sub-container .playlist-title.active::before {
+  margin-left: -24px;
+  content: "➤ ";
+  color: #268bd2;
+}
+html .transparent .album .right-layer .right-panel .playlists-container .playlists-panel .playlists-sub-container .playlist-title.active,
+body .transparent .album .right-layer .right-panel .playlists-container .playlists-panel .playlists-sub-container .playlist-title.active {
+  color: #2aa198;
+  font-weight: bold;
 }
 

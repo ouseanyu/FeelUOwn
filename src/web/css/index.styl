@@ -4,6 +4,7 @@ html, body
   font-family "Monaco", "Ubuntu Mono", "Source Code Pro", "DejaVu Sans"
   font-size 12px
   color $normal-text-color
+  overflow hidden
   height 100%
   width 100%
   background-color setAlpha($background-color, 1)
@@ -16,6 +17,28 @@ html, body
       background transparent
       height 100%
       width 100%
+      display -webkit-flex
+      -webkit-flex-direction row
+      .left-layer
+        width 0px
+        height 100%
+        background-color $dark-background-color
+        transition 0.5s
+        overflow hidden
+        .left-container
+          width 100%
+          height 100%
+          display block
+          .avatar-container
+            width 100%
+            height 100px
+            padding-top 50px
+            .avatar
+              margin 0 auto
+              height 100px
+              width 100px 
+              border-radius 2px
+              box-shadow 0 0 2px $box-shadow
       .content
         height 100%
         width 100%
@@ -76,18 +99,23 @@ html, body
           padding-top 30px
           width 100%
           .songs-panel
-            width 680px
+            width 60%
             margin 0 auto
             text-align center
             table
-              width 100%
+              margin 0 auto
+              width 90%
+              overflow hidden
               border 0
+              overflow hidden
               table-layout fixed
               tr
                 border 0
+                height 16px
                 &.active
                   color $active-text-color
                 th
+                  -webkit-user-select none
                   padding 8px 3px
                   font-size 14px
                   text-align left
@@ -95,20 +123,68 @@ html, body
                   border 0
                   overflow hidden
                   &.ops
-                    width 20px
+                    width 40px
                   &.name
-                    width 70px
+                    max-width 180px
                   &.artist
-                    width 60px
+                    max-width 140px
                   &.album
-                    width 50px
+                    max-width 160px
                   &.duration
-                    width 18px
+                    width 38px
                 td
+                  -webkit-user-select none
                   padding 2px 4px
-                  overflow hidden
                   font-size 12px
                   border 0
                   text-align left
                   text-overflow ellipsis
                   white-space nowrap;
+                  overflow hidden
+                  &.active::after
+                    content " ♬"
+      .right-layer
+        width 0px
+        height 100%
+        background-color $dark-background-color
+        transition 0.5s
+        overflow hidden
+        .right-panel
+          width 100%
+          height 100%
+          .playlists-container
+            width 100%
+            height 100%
+            .playlists-panel
+              padding 30px
+              border 1px dashed $border-color
+              margin 0 auto
+              width 90%
+              height 90%
+              .title
+                font-size 12px
+                color $playlist-title-color
+              .playlists-sub-container
+                padding 4px 5px
+                width 100%
+                .playlist-title
+                  -webkit-user-select none
+                  color $dark-normal-text-color
+                  font-size 14px
+                  padding 5px 10px
+                  text-align left
+                  display block
+                  width 200px
+                  text-overflow ellipsis
+                  white-space nowrap;
+                  overflow hidden
+                  &:hover
+                    color $hover-text-color
+                  &.active::before
+                    margin-left -24px
+                    content "➤ "
+                    color $hover-text-color
+                  &.active
+                    color $active-text-color
+                    font-weight bold 
+

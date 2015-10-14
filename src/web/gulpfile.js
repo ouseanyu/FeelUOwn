@@ -7,7 +7,8 @@ var gulp = require('gulp'),
     rename = require('gulp-rename');
 
 gulp.task('js', function(){
-    gulp.src('js/**/*')
+    gulp.src(['js/plugin/**/*js',
+              'js/**/*'])
         .pipe(concat('all.js'))
         .pipe(gulp.dest('./public'))
         .pipe(uglify())
