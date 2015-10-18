@@ -10,7 +10,7 @@ from PyQt5.QtMultimedia import QMediaPlayer
 from PyQt5.QtNetwork import QNetworkRequest
 from PyQt5.QtWidgets import QApplication
 
-from base.utils import func_coroutine
+from base.utils import func_coroutine, singleton
 from base.logger import LOG
 from base.models import MusicModel
 
@@ -85,3 +85,7 @@ class ControllerApi(object):
             return False
         ControllerApi.player.play(songs[0])
         return True
+
+    @classmethod
+    def ok(cls):
+        LOG.info("Controller Api Ok")

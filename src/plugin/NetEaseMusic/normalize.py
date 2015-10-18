@@ -45,6 +45,7 @@ def web_cache_playlist(func):
                 data = func(*args, **kw)
                 if data['code'] == 200:
                     cache_data[args[1]] = data
+                    return data
                 else:
                     LOG.info("cache playlist failed")
                     return None
@@ -121,7 +122,7 @@ class NetEaseAPI(object):
         """
         data = self.ne.login(username, pw_encrypt, phone)
         if not self.is_response_avaible(data):
-            return data
+            return None
 
         self.uid = data['account']['id']
         data = self.access_data_user(data)
@@ -138,14 +139,14 @@ class NetEaseAPI(object):
             return data
 
         if data['result'] is False:
-            return data['result'], data['captchaId']
+            return data['captchaId']
         else:
-            return data['result'], None
+            return True
 
     def get_song_detail(self, mid):
         data = self.ne.song_detail(mid)
         if not self.is_response_avaible(data):
-            return data
+            return None
         LOG.info("music id %d is available" % mid)
         songs = []
         for each in data['songs']:
@@ -162,7 +163,8 @@ class NetEaseAPI(object):
         """
         data = self.ne.playlist_detail(pid)     # 当列表内容多的时候，耗时久
         if not self.is_response_avaible(data):
-            return data
+            LOG.warning("Get Playlist Detail Failed")
+            return None
 
         data = data['result']
 
@@ -178,7 +180,7 @@ class NetEaseAPI(object):
     def get_user_playlist(self):
         data = self.ne.user_playlist(self.uid)
         if not self.is_response_avaible(data):
-            return data
+            return None
 
         playlist = data['playlist']
         result_playlist = []
@@ -195,7 +197,7 @@ class NetEaseAPI(object):
     def search(self, s, stype=1, offset=0, total='true', limit=60):
         data = self.ne.search(s, stype=1, offset=0, total='true', limit=60)
         if not self.is_response_avaible(data):
-            return data
+            return None
         if data['result']['songCount']:
             songs = data['result']['songs']
             for i, song in enumerate(songs):
@@ -207,7 +209,7 @@ class NetEaseAPI(object):
     def get_artist_detail(self, artist_id):
         data = self.ne.artist_infos(artist_id)
         if not self.is_response_avaible(data):
-            return data
+            return None
 
         for i, track in enumerate(data['hotSongs']):
             data['hotSongs'][i] = self.access_music(track)
@@ -221,7 +223,7 @@ class NetEaseAPI(object):
     def get_album_detail(self, album_id):
         data = self.ne.album_infos(album_id)
         if not self.is_response_avaible(data):
-            return data
+            return None
 
         album = data['album']
         for i, track in enumerate(album['songs']):
@@ -237,7 +239,7 @@ class NetEaseAPI(object):
     def is_favorite_music(self, mid):
         data = self.get_playlist_detail(self.favorite_pid)
         if not self.is_response_avaible(data):
-            return data
+            return None
         tracks = data['tracks']
         for track in tracks:
             if track['id'] == mid:
@@ -251,7 +253,7 @@ class NetEaseAPI(object):
     def get_mv_detail(self, mvid):
         data = self.ne.get_mv_detail(mvid)
         if not self.is_response_avaible(data):
-            return data
+            return None
 
         data = data['data']
         brs = sorted(data['brs'].keys(), key=lambda num: int(num))
@@ -267,7 +269,7 @@ class NetEaseAPI(object):
     def get_lyric_detail(self, music_id):
         data = self.ne.get_lyric_by_musicid(music_id)
         if not self.is_response_avaible(data):
-            return data
+            return None
 
         if 'lrc' not in data.keys():
             return None
@@ -302,7 +304,7 @@ class NetEaseAPI(object):
     def get_radio_songs(self):
         data = self.ne.get_radio_music()
         if not self.is_response_avaible(data):
-            return data
+            return None
         songs = data['data']
         for i, song in enumerate(songs):
             songs[i] = self.access_music_brief(song)

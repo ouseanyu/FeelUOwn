@@ -21,6 +21,8 @@ from widgets.lyric import LyricWidget
 from widgets.desktop_mini import DesktopMiniLayer
 from widgets.notify import NotifyWidget
 
+from plugin import NetEaseMusic, Hotkey
+
 
 class Controller(QWidget):
 
@@ -42,7 +44,6 @@ class Controller(QWidget):
 
         ControllerApi.network_manager = NetworkManager()
 
-        self._search_shortcut = QShortcut(QKeySequence("Ctrl+F"), self)
         self._switch_mode_shortcut = QShortcut(QKeySequence(Qt.Key_Escape), self)
 
         self.setAttribute(Qt.WA_MacShowFocusRect, False)
@@ -55,4 +56,5 @@ class Controller(QWidget):
         app_event_loop.call_later(1, self._init_plugins)
 
     def _init_plugins(self):
-        pass
+        NetEaseMusic.init()
+        Hotkey.init()

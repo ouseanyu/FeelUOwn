@@ -142,6 +142,13 @@ a:hover {
 .no-selection {
   -webkit-user-select: none;
 }
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+}
 
 html,
 body {
@@ -195,6 +202,78 @@ body .transparent .album .left-layer .left-container .avatar-container .avatar {
   width: 100px;
   border-radius: 2px;
   box-shadow: 0 0 2px #5f6e75;
+}
+html .transparent .album .left-layer .left-container .login-container,
+body .transparent .album .left-layer .left-container .login-container {
+  padding-top: 20px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+html .transparent .album .left-layer .left-container .login-container input,
+body .transparent .album .left-layer .left-container .login-container input {
+  display: block;
+  margin: 0 auto;
+  width: 60%;
+  height: 26px;
+  border: 0;
+  background: transparent;
+  font-size: 14px;
+  color: #839496;
+  border-bottom: 1px dashed #5f6e75;
+}
+html .transparent .album .left-layer .left-container .login-container input::-webkit-input-placeholder,
+body .transparent .album .left-layer .left-container .login-container input::-webkit-input-placeholder {
+  opacity: 0.4;
+}
+html .transparent .album .left-layer .left-container .login-container .captcha-container,
+body .transparent .album .left-layer .left-container .login-container .captcha-container {
+  padding-top: 3px;
+  width: 60%;
+  margin: 0 auto;
+  display: block;
+  height: 36px;
+}
+html .transparent .album .left-layer .left-container .login-container .captcha-container input,
+body .transparent .album .left-layer .left-container .login-container .captcha-container input {
+  float: left;
+  width: 40%;
+  padding-top: 5px;
+}
+html .transparent .album .left-layer .left-container .login-container .captcha-container img,
+body .transparent .album .left-layer .left-container .login-container .captcha-container img {
+  border-radius: 2px;
+  border: 0;
+  padding: 0;
+  width: auto;
+  height: 36px;
+  float: right;
+}
+html .transparent .album .left-layer .left-container .login-container .hint,
+body .transparent .album .left-layer .left-container .login-container .hint {
+  display: block;
+  width: 60%;
+  margin: 0 auto;
+  padding-top: 10px;
+  text-align: left;
+  color: #c0332c;
+}
+html .transparent .album .left-layer .left-container .login-container .login-btn,
+body .transparent .album .left-layer .left-container .login-container .login-btn {
+  width: 40%;
+  margin: 8px auto 0px;
+  display: block;
+  padding: 8px 4px;
+  border-radius: 2px;
+  text-align: center;
+  color: #839496;
+  background-color: #fbf6e3;
+  font-size: 16px;
+}
+html .transparent .album .left-layer .left-container .login-container .login-btn:hover,
+body .transparent .album .left-layer .left-container .login-container .login-btn:hover {
+  color: #268bd2;
+  box-shadow: 0 0 2px #fff;
 }
 html .transparent .album .content,
 body .transparent .album .content {
@@ -286,6 +365,9 @@ body .transparent .album .content .songs-container {
 html .transparent .album .content .songs-container .songs-panel,
 body .transparent .album .content .songs-container .songs-panel {
   width: 60%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: auto;
   margin: 0 auto;
   text-align: center;
 }

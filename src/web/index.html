@@ -12,15 +12,23 @@
         <div class="left-layer">
           <div class="left-container">
             <div class="avatar-container">
-              <div class="avatar background-image-center" style="background-image: url('http://p3.music.126.net/HN9M87szZ5ZqwjNi4f9rrg==/7931876883760521.jpg');">
+              <div id="avatar" class="avatar background-image-center"></div>
+            </div>
+            <div class="login-container">
+              <input id="username" placeholder="用户名 邮箱或者手机号" type="text" />
+              <input id="password" placeholder="密码" type="password" />
+              <div class="captcha-container" style="display:none;">
+                <input placeholder="验证码" /><img id="captcha" src="http://music.163.com/captcha?id=oCgC8HtPc4bfIpGnClSgEKRt" />
               </div>
+              <span id="error" class="hint" style="display:none;">密码错误</span>
+              <span id="login-btn" class="login-btn btn">登 录</span>
             </div>
           </div>
         </div>
         <div class="content">
           <div class="search-container">
             <div class="search_panel">
-              <input placeholder="搜索歌曲、歌手、专辑"></input>
+              <input id="search" placeholder="搜索歌曲、歌手、专辑" />
             </div>
           </div>
           <div class="music-table-container">
@@ -29,11 +37,11 @@
           </div>
           <div class="player-control-container">
             <div class="player-control-panel" >
-              <div class="play-previous play-control btn" style="background-image: url('imgs/play-previous.jpg')">
+              <div class="play-previous play-control btn">
               </div>
-              <div class="play-pause play-control btn" style="background-image: url('imgs/play-pause.jpg')">
+              <div class="play-pause play-control btn">
               </div>
-              <div class="play-next play-control btn" style="background-image: url('imgs/play-next.jpg')">
+              <div class="play-next play-control btn">
               </div>
             </div>
           </div>
@@ -44,6 +52,7 @@
           <div class="songs-container">
             <div class="songs-panel">
               <table>
+                <tbody>
                 <tr>
                   <th class="ops"></th>
                   <th class="name">歌曲名</th>
@@ -51,27 +60,9 @@
                   <th class="album">专辑</th>
                   <th class="duration">时长</th>
                 </tr>
-                <tr class="">
-                  <td>1</td>
-                  <td>Time to say goodbye hahahahahh ahhahh   fajsdlfjasljfla</td>
-                  <td>Sarah Brightman</td>
-                  <td>The world best album</td>
-                  <td>3:30</td>
-                </tr>
-                <tr class="active">
-                  <td class="active">2</td>
-                  <td>Time to say goodbye</td>
-                  <td>Sarah Brightman</td>
-                  <td>The world best album</td>
-                  <td>3:30</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Time to say goodbye</td>
-                  <td>Sarah Brightman</td>
-                  <td>The world best album</td>
-                  <td>3:30</td>
-                </tr>
+                </tbody>
+                <tbody id="songs">
+                </tbody>
               </table>
             </div>
           </div>
@@ -81,19 +72,10 @@
             <div class="playlists-container">
               <div class="playlists-panel">
                 <label class="title">创建的歌单</label>
-                <div class="playlists-sub-container">
-                  <div class="playlist-title no-selection btn active">◉ 这是我哈发送喜欢的歌单</div>
-                  <div class="playlist-title no-selection btn">◈ 这是就是发生的几率就</div>
-                  <div class="playlist-title no-selection btn">◈ 这是我喜</div>
-                  <div class="playlist-title no-selection btn">◈ 这是我喜欢的歌单</div>
-                  <div class="playlist-title no-selection btn">◈ 这是我喜欢的</div>
+                <div id="mine-playlists-container" class="playlists-sub-container">
                 </div>
                 <label class="title">收藏的歌单</label>
-                <div class="playlists-sub-container">
-                  <div class="playlist-title btn">◈ 这是我喜房间阿里欢的歌单</div>
-                  <div class="playlist-title btn">◈ 这是我喜欢的歌单</div>
-                  <div class="playlist-title btn">◈ 这是我喜单</div>
-                  <div class="playlist-title btn">◈ 我喜欢的歌单</div>
+                <div id="collection-playlists-container" class="playlists-sub-container">
                 </div>
               </div>
             </div>

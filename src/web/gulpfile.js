@@ -11,7 +11,7 @@ gulp.task('js', function(){
               'js/**/*'])
         .pipe(concat('all.js'))
         .pipe(gulp.dest('./public'))
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(gulp.dest('./public'))
         .pipe(rename('all.min.js'));
 });
@@ -25,7 +25,7 @@ gulp.task('css', function(){
     
 
 gulp.task('watch', ['js', 'css'], function(){
-    gulp.watch('js/*.js')
+    gulp.watch('js/**/*')
         .on('change', function(event) {
             console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
             gulp.run('js');

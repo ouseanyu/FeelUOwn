@@ -6,14 +6,14 @@ import json
 from base.logger import LOG
 from base.utils import func_coroutine
 from constants import DATA_PATH
-from interfaces import ControllerApi, ViewOp
+from interfaces import ControllerApi
 
 from .normalize import NetEaseAPI
 
 netease_normalize = NetEaseAPI()
 
 
-def init(controller):
+def init():
     """init plugin """
 
     LOG.info("NetEase Plugin init")
@@ -26,7 +26,6 @@ def init(controller):
             data_dict = json.loads(data)
             if "uid" in data_dict:
                 netease_normalize.uid = data_dict['uid']
-                ViewOp.load_user_infos(data_dict)
 
     if os.path.exists(DATA_PATH + netease_normalize.ne.cookies_filename):
         @func_coroutine

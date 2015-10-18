@@ -39,6 +39,61 @@ html, body
               width 100px 
               border-radius 2px
               box-shadow 0 0 2px $box-shadow
+          .login-container
+            padding-top 20px
+            width 100%
+            height 100%
+            text-align center
+            input
+              display block
+              margin 0 auto
+              width 60%
+              height 26px
+              border 0
+              background transparent
+              font-size 14px
+              color $dark-normal-text-color
+              border-bottom 1px dashed $border-color
+              &::-webkit-input-placeholder
+                opacity 0.4
+            .captcha-container
+              padding-top 3px
+              width 60%
+              margin 0 auto
+              display block
+              height 36px
+              input
+                float left
+                width 40%
+                padding-top 5px
+              img
+                border-radius 2px
+                border 0
+                padding 0
+                width auto
+                height 36px
+                float right
+            .hint
+              display block
+              // display none
+              width 60%
+              margin 0 auto
+              padding-top 10px
+              text-align left
+              color $error-text-color
+            .login-btn
+              width 40%
+              margin 8px auto 0px
+              display block
+              padding 8px 4px
+              border-radius 2px
+              text-align center
+              color $dark-normal-text-color
+              background-color $background-color
+              font-size 16px
+              &:hover
+                color $hover-text-color
+                box-shadow 0 0 2px white
       .content
         height 100%
         width 100%
@@ -100,6 +155,9 @@ html, body
           width 100%
           .songs-panel
             width 60%
+            overflow-y scroll
+            overflow-x hidden
+            height auto
             margin 0 auto
             text-align center
             table
