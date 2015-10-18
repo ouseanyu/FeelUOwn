@@ -98,8 +98,8 @@ html, body
         height 100%
         width 100%
         .search-container
+          display block
           width 100%
-          height 30px
           .search_panel
             width 300px
             margin 0 auto
@@ -116,15 +116,16 @@ html, body
               &:focus
                 box-shadow 0 0 5px $box-shadow
         .music-table-container  // align center
+          display block
           margin 0 auto
-          margin-top 50px
+          padding 10px 0 10px 0
           width 56%
           height auto
-          border 1px dashed $border-color
+          border-bottom 1px dashed $border-color
           .music-table-panel
             width 80%
         .player-control-container
-          padding-top 30px
+          padding-top 20px
           width 100%
           height 100px
           .player-control-panel
@@ -151,7 +152,10 @@ html, body
               width 60px
               height 60px
         .songs-container
-          padding-top 30px
+          padding-top 20px
+          overflow-x hidden
+          overflow-y scroll
+          height 60%
           width 100%
           .songs-panel
             width 60%
@@ -163,15 +167,16 @@ html, body
             table
               margin 0 auto
               width 90%
-              overflow hidden
               border 0
-              overflow hidden
               table-layout fixed
               tr
                 border 0
                 height 16px
                 &.active
                   color $active-text-color
+                &:hover
+                  cursor default
+                  background-color $row-hover-background-color
                 th
                   -webkit-user-select none
                   padding 8px 3px
@@ -182,12 +187,12 @@ html, body
                   overflow hidden
                   &.ops
                     width 40px
-                  &.name
-                    max-width 180px
-                  &.artist
-                    max-width 140px
-                  &.album
-                    max-width 160px
+                  //&.name
+                  //  max-width 180px
+                  //&.artist
+                  //  max-width 140px
+                  //&.album
+                  //  max-width 160px
                   &.duration
                     width 38px
                 td

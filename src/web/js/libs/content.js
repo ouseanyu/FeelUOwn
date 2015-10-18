@@ -6,9 +6,11 @@ var content = {
             var playlist = JSON.parse(data).result;
             var songs = playlist.tracks;
             var pEle = $("#songs");
+            pEle.empty();
             for (var i=0; i<songs.length; i++){
                 var song = songs[i];
-                var trEle = $("<tr />");
+                var trEle = $("<tr class='song' />");
+                trEle.attr('mid', song.id);
                 var indexEle = $("<td />");
                 indexEle.text(i+1);
                 var titleEle = $("<td />");
@@ -43,5 +45,18 @@ var content = {
                 console.log("add a songs");
             }
         }
+        content.bindSongPlay();
+    },
+
+    bindSongPlay: function(){
+        $(".song").dblclick(function(){
+            var mid = $(this).attr('mid');
+            mid = parseInt(mid);
+            python.play(mid);
+        });
     }
 };
+
+
+$(function(){
+});

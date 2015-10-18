@@ -82,4 +82,14 @@ $(function(){
         location.reload();
     });
 
+    $(window).resize(function(){
+        var search_height = $(".search_container").outerHeight(true);
+        var split_line = $(".music-table-container").outerHeight(true) * 2;
+        var control_height = $(".player-control-container").outerHeight(true);
+        var window_height = $(window).height();
+
+        $("songs-container").height(window_height-search_height-
+                split_line-control_height-30);
+    });
+
 });

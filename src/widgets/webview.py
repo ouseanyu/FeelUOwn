@@ -60,6 +60,14 @@ class ExposeToJs(QObject):
         LOG.warning("Get Playlist FAIL")
         return data
 
+    @pyqtSlot(int)
+    def play(self, mid):
+        songs = ControllerApi.api.get_song_detail(mid)
+        if songs is not None:
+            ControllerApi.player.play(songs[0])
+        else:
+            LOG.error("Get Music Model Failed")
+
 
 class WebView(QWebView):
     """这个类的实例可能发出的信号。（也就是说，controller只能绑定这些信号，

@@ -282,8 +282,8 @@ body .transparent .album .content {
 }
 html .transparent .album .content .search-container,
 body .transparent .album .content .search-container {
+  display: block;
   width: 100%;
-  height: 30px;
 }
 html .transparent .album .content .search-container .search_panel,
 body .transparent .album .content .search-container .search_panel {
@@ -308,11 +308,12 @@ body .transparent .album .content .search-container .search_panel input:focus {
 }
 html .transparent .album .content .music-table-container,
 body .transparent .album .content .music-table-container {
+  display: block;
   margin: 0 auto;
-  margin-top: 50px;
+  padding: 10px 0 10px 0;
   width: 56%;
   height: auto;
-  border: 1px dashed #5f6e75;
+  border-bottom: 1px dashed #5f6e75;
 }
 html .transparent .album .content .music-table-container .music-table-panel,
 body .transparent .album .content .music-table-container .music-table-panel {
@@ -320,7 +321,7 @@ body .transparent .album .content .music-table-container .music-table-panel {
 }
 html .transparent .album .content .player-control-container,
 body .transparent .album .content .player-control-container {
-  padding-top: 30px;
+  padding-top: 20px;
   width: 100%;
   height: 100px;
 }
@@ -359,7 +360,10 @@ body .transparent .album .content .player-control-container .player-control-pane
 }
 html .transparent .album .content .songs-container,
 body .transparent .album .content .songs-container {
-  padding-top: 30px;
+  padding-top: 20px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 60%;
   width: 100%;
 }
 html .transparent .album .content .songs-container .songs-panel,
@@ -375,9 +379,7 @@ html .transparent .album .content .songs-container .songs-panel table,
 body .transparent .album .content .songs-container .songs-panel table {
   margin: 0 auto;
   width: 90%;
-  overflow: hidden;
   border: 0;
-  overflow: hidden;
   table-layout: fixed;
 }
 html .transparent .album .content .songs-container .songs-panel table tr,
@@ -388,6 +390,11 @@ body .transparent .album .content .songs-container .songs-panel table tr {
 html .transparent .album .content .songs-container .songs-panel table tr.active,
 body .transparent .album .content .songs-container .songs-panel table tr.active {
   color: #2aa198;
+}
+html .transparent .album .content .songs-container .songs-panel table tr:hover,
+body .transparent .album .content .songs-container .songs-panel table tr:hover {
+  cursor: default;
+  background-color: #ece8d4;
 }
 html .transparent .album .content .songs-container .songs-panel table tr th,
 body .transparent .album .content .songs-container .songs-panel table tr th {
@@ -402,18 +409,6 @@ body .transparent .album .content .songs-container .songs-panel table tr th {
 html .transparent .album .content .songs-container .songs-panel table tr th.ops,
 body .transparent .album .content .songs-container .songs-panel table tr th.ops {
   width: 40px;
-}
-html .transparent .album .content .songs-container .songs-panel table tr th.name,
-body .transparent .album .content .songs-container .songs-panel table tr th.name {
-  max-width: 180px;
-}
-html .transparent .album .content .songs-container .songs-panel table tr th.artist,
-body .transparent .album .content .songs-container .songs-panel table tr th.artist {
-  max-width: 140px;
-}
-html .transparent .album .content .songs-container .songs-panel table tr th.album,
-body .transparent .album .content .songs-container .songs-panel table tr th.album {
-  max-width: 160px;
 }
 html .transparent .album .content .songs-container .songs-panel table tr th.duration,
 body .transparent .album .content .songs-container .songs-panel table tr th.duration {
