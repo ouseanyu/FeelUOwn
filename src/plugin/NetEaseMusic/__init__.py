@@ -6,7 +6,7 @@ import json
 from base.logger import LOG
 from base.utils import func_coroutine
 from constants import DATA_PATH
-from interfaces import ControllerApi
+from interfaces import ControllerApi, View
 
 from .normalize import NetEaseAPI
 
@@ -24,8 +24,12 @@ def init():
         with open(DATA_PATH + netease_normalize.user_info_filename) as f:
             data = f.read()
             data_dict = json.loads(data)
-            if "uid" in data_dict:
-                netease_normalize.uid = data_dict['uid']
+            uid = data_dict.get('uid')
+            if uid is not None:
+                LOG.info("Find Availabel User Data")
+                netease_normalize.uid = uid
+                js_code = "window.setLogin(%s)" % json.dumps(data_dict)
+                View.webview.run_js(js_code)
 
     if os.path.exists(DATA_PATH + netease_normalize.ne.cookies_filename):
         @func_coroutine

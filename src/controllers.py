@@ -1,27 +1,20 @@
 # -*- coding:utf-8 -*-
 
-import sys
-import asyncio
-import platform
-
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-from PyQt5.QtWidgets import QWidget, QShortcut, QVBoxLayout
+from PyQt5.QtWidgets import *
 
-from interfaces import ControllerApi
+from interfaces import ControllerApi, View
 from constants import WINDOW_ICON
 
 from base.player import Player
 from base.network_manger import NetworkManager
-from base.utils import func_coroutine
 
 from widgets.webview import WebView
 
 from widgets.lyric import LyricWidget
 from widgets.desktop_mini import DesktopMiniLayer
 from widgets.notify import NotifyWidget
-
-from plugin import NetEaseMusic, Hotkey
 
 
 class Controller(QWidget):
@@ -46,15 +39,19 @@ class Controller(QWidget):
 
         self._switch_mode_shortcut = QShortcut(QKeySequence(Qt.Key_Escape), self)
 
+        self.setAttribute(Qt.WA_TranslucentBackground)
         self.setAttribute(Qt.WA_MacShowFocusRect, False)
         self.setWindowIcon(QIcon(WINDOW_ICON))
         self.setWindowTitle('FeelUOwn')
         self.resize(960, 580)
         self.setLayout(self.layout)
 
-        app_event_loop = asyncio.get_event_loop()
-        app_event_loop.call_later(1, self._init_plugins)
-
-    def _init_plugins(self):
-        NetEaseMusic.init()
-        Hotkey.init()
+    def paintEvent(self, event):
+        option = QStyleOption()
+        option.initFrom(self)
+        painter = QPainter(self)
+        painter.setCompositionMode(QPainter.CompositionMode_Clear)
+        painter.fillRect(self.rect(), Qt.transparent)
+        painter.setCompositionMode(QPainter.CompositionMode_SourceOver)
+        style = self.style()
+        style.drawPrimitive(QStyle.PE_Widget, option, painter, self)

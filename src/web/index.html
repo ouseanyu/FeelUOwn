@@ -7,49 +7,50 @@
     <script src="public/all.js" type="text/javascript" ></script>
   </head>
   <body>
+    <div class="background-image-center album-img">
+    </div>
     <div class="transparent">
-      <div class="album">
-        <div class="left-layer">
-          <div class="left-container">
-            <div class="avatar-container">
-              <div id="avatar" class="avatar background-image-center"></div>
+      <div class="left-layer">
+        <div class="left-container">
+          <div class="avatar-container">
+            <div id="avatar" class="avatar background-image-center"></div>
+          </div>
+          <div class="login-container">
+            <input id="username" placeholder="用户名 邮箱或者手机号" type="text" />
+            <input id="password" placeholder="密码" type="password" />
+            <div class="captcha-container" style="display:none;">
+              <input placeholder="验证码" /><img id="captcha" src="http://music.163.com/captcha?id=oCgC8HtPc4bfIpGnClSgEKRt" />
             </div>
-            <div class="login-container">
-              <input id="username" placeholder="用户名 邮箱或者手机号" type="text" />
-              <input id="password" placeholder="密码" type="password" />
-              <div class="captcha-container" style="display:none;">
-                <input placeholder="验证码" /><img id="captcha" src="http://music.163.com/captcha?id=oCgC8HtPc4bfIpGnClSgEKRt" />
-              </div>
-              <span id="error" class="hint" style="display:none;">密码错误</span>
-              <span id="login-btn" class="login-btn btn">登 录</span>
+            <span id="error" class="hint" style="display:none;">密码错误</span>
+            <span id="login-btn" class="login-btn btn">登 录</span>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="search-container">
+          <div class="search_panel">
+            <input id="search" placeholder="搜索歌曲、歌手、专辑" />
+          </div>
+        </div>
+        <div class="music-table-container">
+          <div class="music-table-panel">
+          </div>
+        </div>
+        <div class="player-control-container">
+          <div class="player-control-panel" >
+            <div class="play-previous play-control btn">
+            </div>
+            <div class="play-pause play-control btn">
+            </div>
+            <div class="play-next play-control btn">
             </div>
           </div>
         </div>
-        <div class="content">
-          <div class="search-container">
-            <div class="search_panel">
-              <input id="search" placeholder="搜索歌曲、歌手、专辑" />
-            </div>
-          </div>
-          <div class="music-table-container">
-            <div class="music-table-panel">
-            </div>
-          </div>
-          <div class="player-control-container">
-            <div class="player-control-panel" >
-              <div class="play-previous play-control btn">
-              </div>
-              <div class="play-pause play-control btn">
-              </div>
-              <div class="play-next play-control btn">
-              </div>
-            </div>
-          </div>
-          <div class="music-table-container">
-            <div class="music-table-panel"></div>
-          </div>
-          <div class="songs-container">
-            <div class="songs-panel">
+        <div class="music-table-container">
+          <div class="music-table-panel"></div>
+        </div>
+        <div class="songs-container">
+          <div class="songs-panel">
             <table>
               <table id="songs-table">
                 <thead>
@@ -64,19 +65,18 @@
                 <tbody id="songs">
                 </tbody>
               </table>
-            </div>
           </div>
         </div>
-        <div class="right-layer">
-          <div class="right-panel">
-            <div class="playlists-container">
-              <div class="playlists-panel">
-                <label class="title">创建的歌单</label>
-                <div id="mine-playlists-container" class="playlists-sub-container">
-                </div>
-                <label class="title">收藏的歌单</label>
-                <div id="collection-playlists-container" class="playlists-sub-container">
-                </div>
+      </div>
+      <div class="right-layer">
+        <div class="right-panel">
+          <div class="playlists-container">
+            <div class="playlists-panel">
+              <label class="title">创建的歌单</label>
+              <div id="mine-playlists-container" class="playlists-sub-container">
+              </div>
+              <label class="title">收藏的歌单</label>
+              <div id="collection-playlists-container" class="playlists-sub-container">
               </div>
             </div>
           </div>

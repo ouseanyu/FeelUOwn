@@ -1,9 +1,14 @@
+setAlpha(color, alpha)
+  rgba(red(color), green(color), blue(color), alpha)
+
+$opacity = 1
+
 $background-color = #FBF6E3
 $dark-background-color = #182D37
 $border-color = #5F6E75
 $box-shadow = #5F6E75
 
-$row-hover-background-color = #ECE8D4
+$row-hover-background-color = setAlpha(black, 0.1)
 
 $normal-text-color = #5F6E75
 $playlist-title-color = #5F6E75
@@ -11,6 +16,3 @@ $dark-normal-text-color = #839496
 $active-text-color = #2aa198
 $hover-text-color = #268bd2
 $error-text-color = #C0332C
-
-setAlpha(color, alpha)
-  rgba(red(color), green(color), blue(color), alpha)

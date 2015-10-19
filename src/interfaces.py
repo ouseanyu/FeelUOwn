@@ -89,3 +89,9 @@ class ControllerApi(object):
     @classmethod
     def ok(cls):
         LOG.info("Controller Api Ok")
+
+
+class View(object):
+    webview = None
+    # when a page load finish, the js code will be precessed and clear
+    js_queue = []

@@ -52,8 +52,20 @@ var content = {
         $(".song").dblclick(function(){
             var mid = $(this).attr('mid');
             mid = parseInt(mid);
-            python.play(mid);
+            var musicModel = python.play(mid);
+            if (musicModel !== null){
+                musicModel = JSON.parse(musicModel);
+                var imgUrl = musicModel.album.picUrl;
+                //content.changeBlurImg(imgUrl);
+            }
         });
+    },
+
+    changeBlurImg: function(imgUrl) {
+        var ele = $(".album-img");
+        var style = "<style>.album-img::before{background-image: url('" + imgUrl + "') !important;}</style>";
+        ele.empty();
+        ele.append(style);
     }
 };
 

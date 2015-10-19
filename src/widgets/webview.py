@@ -1,15 +1,125 @@
 # -*- coding: utf8 -*-
 import json
 
+from PyQt5.QtGui import QPalette
 from PyQt5.QtCore import *
 from PyQt5.QtWebKitWidgets import QWebView
 from PyQt5.QtWebKit import QWebSettings
 
-from interfaces import ControllerApi
+from interfaces import ControllerApi, View
 from constants import MODE, PUBLIC_PATH, DEBUG, HTML_PATH
 
+from plugin import NetEaseMusic, Hotkey
+
 from base.logger import LOG
-from base.utils import func_coroutine
+
+
+class WebView(QWebView):
+    """这个类的实例可能发出的信号。（也就是说，controller只能绑定这些信号，
+    其他信号尽量不要绑定）
+    loadProgress(int)
+    """
+    signal_play = pyqtSignal([int])
+    signal_play_songs = pyqtSignal([list])
+    signal_search_artist = pyqtSignal([int])
+    signal_search_album = pyqtSignal([int])
+    signal_play_mv = pyqtSignal([int])
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        View.webview = self
+
+        self.expose_to_js = ExposeToJs()
+        self._load_finished = False
+        self.init()
+        self.load_htmlfile('index.html')
+
+    def init(self):
+        self.init_singal_binding()
+        if MODE == DEBUG:
+            self.settings().setAttribute(QWebSettings.DeveloperExtrasEnabled, True)
+        else:
+            self.setContextMenuPolicy(Qt.NoContextMenu)
+        palette = self.palette()
+        palette.setBrush(QPalette.Base, Qt.transparent)
+        self.page().setPalette(palette)
+        self.setAttribute(Qt.WA_OpaquePaintEvent, False)
+        NetEaseMusic.init()
+        Hotkey.init()
+
+    def init_singal_binding(self):
+        self.loadFinished.connect(self.on_load_finished)
+        self.linkClicked.connect(self.on_link_clicked)
+
+    def load_css(self):
+        all_css = QFileInfo(PUBLIC_PATH + 'all.css').absoluteFilePath()
+        self.settings().setUserStyleSheetUrl(QUrl.fromLocalFile(all_css))
+
+    def run_js(self, js_code):
+        if self._load_finished:
+            self.page().mainFrame().evaluateJavaScript(js_code)
+        else:
+            View.js_queue.append(js_code)
+
+    @pyqtSlot(QUrl)
+    def on_link_clicked(self, url):
+        return False
+
+    @pyqtSlot()
+    def on_load_finished(self):
+        self._load_finished = True
+        self.page().mainFrame().addToJavaScriptWindowObject(
+            'python', self.expose_to_js)
+
+        for js_code in View.js_queue:
+            LOG.info("running js code : " + js_code)
+            self.page().mainFrame().evaluateJavaScript(js_code)
+        View.js_queue.clear()
+
+    """给js调用的函数, 需要加上pyqtSlot装饰器
+    """
+    @pyqtSlot(int)
+    def play(self, mid):
+        """
+        """
+        LOG.debug("play music: the music_id is " + str(mid))
+        self.signal_play.emit(mid)
+
+    @pyqtSlot(int)
+    def play_mv(self, mvid):
+        LOG.debug("play mv: the mv_id is " + str(mvid))
+        self.signal_play_mv.emit(mvid)
+
+    @pyqtSlot(str)
+    def play_songs(self, songs_str):
+        LOG.debug("play songs")
+        songs = json.loads(songs_str)
+        tracks = songs['tracks']
+        self.signal_play_songs.emit(tracks)
+
+    def search_artist(self, aid):
+        LOG.debug("search artist info, the artist id is: " + str(aid))
+        self.signal_search_artist.emit(aid)
+
+    @pyqtSlot(int)
+    def search_album(self, aid):
+        LOG.debug("search album info, the album id is: " + str(aid))
+        self.signal_search_album.emit(aid)
+
+    """下面都是给controller调用的函数，最好不要在其他地方调用
+    """
+
+    def load_htmlfile(self, filename):
+        self._load_finished = False
+        path = QFileInfo(HTML_PATH + filename).absoluteFilePath()
+        self.load(QUrl.fromLocalFile(path))
+
+    def load_search_result(self, songs):
+        data = json.dumps(songs)
+        path = QFileInfo(HTML_PATH + 'search.html').absoluteFilePath()
+        js_code = 'window.fill_search(%s)' % data
+        View.js_queue.append(js_code)
+        self.load(QUrl.fromLocalFile(path))
 
 
 class ExposeToJs(QObject):
@@ -59,103 +169,14 @@ class ExposeToJs(QObject):
             return json.dumps(result)
         LOG.warning("Get Playlist FAIL")
         return data
-
-    @pyqtSlot(int)
+    
+    @pyqtSlot(int, result=str)
     def play(self, mid):
         songs = ControllerApi.api.get_song_detail(mid)
         if songs is not None:
-            ControllerApi.player.play(songs[0])
+            music_model = songs[0]
+            ControllerApi.player.play(music_model)
+            return json.dumps(music_model)
         else:
             LOG.error("Get Music Model Failed")
-
-
-class WebView(QWebView):
-    """这个类的实例可能发出的信号。（也就是说，controller只能绑定这些信号，
-    其他信号尽量不要绑定）
-    loadProgress(int)
-    """
-    signal_play = pyqtSignal([int])
-    signal_play_songs = pyqtSignal([list])
-    signal_search_artist = pyqtSignal([int])
-    signal_search_album = pyqtSignal([int])
-    signal_play_mv = pyqtSignal([int])
-
-    def __init__(self, parent=None):
-        super().__init__(parent)
-
-        self.init()
-        self.expose_to_js = ExposeToJs()
-        self.js_queue = []  # 保存页面load完，要执行的js代码
-
-        self.load_htmlfile('index.html')
-
-    def init(self):
-        self.init_singal_binding()
-        if MODE == DEBUG:
-            self.settings().setAttribute(QWebSettings.DeveloperExtrasEnabled, True)
-        else:
-            self.setContextMenuPolicy(Qt.NoContextMenu)
-
-    def init_singal_binding(self):
-        self.loadFinished.connect(self.on_load_finished)
-        self.linkClicked.connect(self.on_link_clicked)
-
-    def load_css(self):
-        all_css = QFileInfo(PUBLIC_PATH + 'all.css').absoluteFilePath()
-        self.settings().setUserStyleSheetUrl(QUrl.fromLocalFile(all_css))
-
-    @pyqtSlot(QUrl)
-    def on_link_clicked(self, url):
-        return False
-
-    @pyqtSlot()
-    def on_load_finished(self):
-        self.page().mainFrame().addToJavaScriptWindowObject(
-            'python', self.expose_to_js)
-        for js_code in self.js_queue:
-            self.page().mainFrame().evaluateJavaScript(js_code)
-        self.js_queue.clear()
-
-    """给js调用的函数, 需要加上pyqtSlot装饰器
-    """
-    @pyqtSlot(int)
-    def play(self, mid):
-        """
-        """
-        LOG.debug("play music: the music_id is " + str(mid))
-        self.signal_play.emit(mid)
-
-    @pyqtSlot(int)
-    def play_mv(self, mvid):
-        LOG.debug("play mv: the mv_id is " + str(mvid))
-        self.signal_play_mv.emit(mvid)
-
-    @pyqtSlot(str)
-    def play_songs(self, songs_str):
-        LOG.debug("play songs")
-        songs = json.loads(songs_str)
-        tracks = songs['tracks']
-        self.signal_play_songs.emit(tracks)
-
-    def search_artist(self, aid):
-        LOG.debug("search artist info, the artist id is: " + str(aid))
-        self.signal_search_artist.emit(aid)
-
-    @pyqtSlot(int)
-    def search_album(self, aid):
-        LOG.debug("search album info, the album id is: " + str(aid))
-        self.signal_search_album.emit(aid)
-
-    """下面都是给controller调用的函数，最好不要在其他地方调用
-    """
-
-    def load_htmlfile(self, filename):
-        path = QFileInfo(HTML_PATH + filename).absoluteFilePath()
-        self.load(QUrl.fromLocalFile(path))
-
-    def load_search_result(self, songs):
-        data = json.dumps(songs)
-        path = QFileInfo(HTML_PATH + 'search.html').absoluteFilePath()
-        js_code = 'window.fill_search(%s)' % data
-        self.js_queue.append(js_code)
-        self.load(QUrl.fromLocalFile(path))
+            return None
